@@ -12,7 +12,7 @@ const todos = [
     {
         id: 1,
         text: 'walk the dog',
-        priority: 'low'
+        priority: 'high'
     },
     {
         id: 2,
@@ -40,3 +40,21 @@ const links = Array.from(document.querySelectorAll('a'));
 const urls = links.map(function (a) {
     return a.href;
 });
+
+
+function myMap(arr, callback) {
+    const mappedArray = [];
+    for (let i = 0; i < arr.length; i++) {
+        const val = callback(arr[i], i, arr);
+        mappedArray.push(val);
+    }
+    return mappedArray;
+}
+
+const priorityMap = myMap(todos, function (todo) {
+    return todo.priority
+});
+
+const repeatedStrings = myMap(['a', 'b', 'c', 'd', 'e'], function (str, idx) {
+    return str.repeat(idx)
+})

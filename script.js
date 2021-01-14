@@ -95,3 +95,40 @@ const noVowels = words.filter(function (word) {
     return !containsVowel(word);
 })
 
+const allCheckedBoxes = document.querySelectorAll('input[type="checkbox"]');
+
+const checked = Array.from(allCheckedBoxes).filter(function (box) {
+    return box.checked;
+});
+
+const completedItems = checked.map(function (checkedBox) {
+    return checkedBox.parentElement.innerText;
+});
+
+function extractCompletedItems() {
+    const allCheckedBoxes = document.querySelectorAll('input[type="checkbox"]');
+
+    return Array.from(allCheckedBoxes).filter(function (box) {
+        return box.checked;
+    })
+        .map(function (checkedBox) {
+            return checkedBox.parentElement.innerText;
+        });
+}
+
+function myFilter(arr, callback) {
+    const filteredArray = [];
+    for (let i = 0; i < arr.length; i++) {
+        if (callback(arr[i], i, arr)) {
+            filteredArray.push(arr[i])
+        };
+    }
+    return filteredArray;
+}
+const shorties = myFilter(words, function (word) {
+    return word.length <= 7;
+});
+
+const everyOtherWord = myFilter(words, function (word, i) {
+    return i % 2 === 0
+});
